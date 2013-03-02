@@ -3,8 +3,7 @@ skillsquar.es [![Bake Status](https://secure.travis-ci.org/chrisvogt/skillsquare
 
 ![SkillSquares](http://i.imgur.com/bHQZvW9.jpg)
 
-Skillsquares is an open source tool linking a user's LinkedIn skills with Smarterer tests.
-Evaluate claimed skills.
+Skillsquares is an open source tool linking skills listed on LinkedIn with Smarterer tests. Use to benchmark applicant skills.
 
 Some Handy Links
 ----------------
