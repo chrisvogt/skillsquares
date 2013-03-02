@@ -1,23 +1,34 @@
 <?php
+App::uses('AppModel', 'Model');
 /**
- * Provider model for SkillSquar.es.
+ * Provider Model
  *
- * @package       CakePHP
- * @subpackage    skillsquares
+ * @property Test $Test
  */
-class Provider extends Model {
+class Provider extends AppModel {
 
-  /**
-   * Turn on application scaffolding
-   */
-  public $scaffold;
 
-  public $hasMany = array(
-      'Test' => array(
-          'className'  => 'Test',
-          'conditions' => array('Test.is_active' => '1'),
-          'order'      => 'Test.created DESC'
-      )
-  );
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'Test' => array(
+			'className' => 'Test',
+			'foreignKey' => 'provider_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 
 }

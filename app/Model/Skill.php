@@ -1,17 +1,36 @@
 <?php
+App::uses('AppModel', 'Model');
 /**
- * Skill model for SkillSquar.es.
+ * Skill Model
  *
- * @package       CakePHP
- * @subpackage    skillsquares
+ * @property Test $Test
  */
-class Skill extends Model {
+class Skill extends AppModel {
 
-  /**
-   * Turn on application scaffolding
-   */
-  public $scaffold;
 
-  public $hasAndBelongsToMany = array('Test');
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * hasAndBelongsToMany associations
+ *
+ * @var array
+ */
+	public $hasAndBelongsToMany = array(
+		'Test' => array(
+			'className' => 'Test',
+			'joinTable' => 'skills_tests',
+			'foreignKey' => 'skill_id',
+			'associationForeignKey' => 'test_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		)
+	);
 
 }

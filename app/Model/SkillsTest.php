@@ -1,12 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Score Model
+ * SkillsTest Model
  *
- * @property User $User
+ * @property Skill $Skill
  * @property Test $Test
  */
-class Score extends AppModel {
+class SkillsTest extends AppModel {
 
 /**
  * Validation rules
@@ -14,7 +14,17 @@ class Score extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'score' => array(
+		'skill_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'test_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -34,9 +44,9 @@ class Score extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
+		'Skill' => array(
+			'className' => 'Skill',
+			'foreignKey' => 'skill_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

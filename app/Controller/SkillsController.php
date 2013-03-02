@@ -1,32 +1,101 @@
 <?php
+App::uses('AppController', 'Controller');
 /**
- * Skills controller
+ * Skills Controller
  *
- * Skills (test categories) actions and methods
- *
- * @package       skillsquares
+ * @property Skill $Skill
  */
 class SkillsController extends AppController {
 
 /**
- * Controller name
+ * index method
  *
- * @var string
+ * @return void
  */
-  public $name = 'Skills';
+	public function index() {
+		$this->Skill->recursive = 0;
+		$this->set('skills', $this->paginate());
+	}
 
 /**
- * This controller does not use a model
+ * view method
  *
- * @var array
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
  */
-  public $uses = array();
+	public function view($id = null) {
+		if (!$this->Skill->exists($id)) {
+			throw new NotFoundException(__('Invalid skill'));
+		}
+		$options = array('conditions' => array('Skill.' . $this->Skill->primaryKey => $id));
+		$this->set('skill', $this->Skill->find('first', $options));
+	}
 
-  /**
-   * Turn on application scaffolding
-   */
-  public $scaffold;
+/**
+ * add method
+ *
+ * @return void
+ */
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->Skill->create();
+			if ($this->Skill->save($this->request->data)) {
+				$this->Session->setFlash(__('The skill has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The skill could not be saved. Please, try again.'));
+			}
+		}
+		$tests = $this->Skill->Test->find('list');
+		$this->set(compact('tests'));
+	}
 
-  public $hasAndBelongsToMany = array('Test');
+/**
+ * edit method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function edit($id = null) {
+		if (!$this->Skill->exists($id)) {
+			throw new NotFoundException(__('Invalid skill'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Skill->save($this->request->data)) {
+				$this->Session->setFlash(__('The skill has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The skill could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('Skill.' . $this->Skill->primaryKey => $id));
+			$this->request->data = $this->Skill->find('first', $options);
+		}
+		$tests = $this->Skill->Test->find('list');
+		$this->set(compact('tests'));
+	}
 
+/**
+ * delete method
+ *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
+ * @param string $id
+ * @return void
+ */
+	public function delete($id = null) {
+		$this->Skill->id = $id;
+		if (!$this->Skill->exists()) {
+			throw new NotFoundException(__('Invalid skill'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Skill->delete()) {
+			$this->Session->setFlash(__('Skill deleted'));
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->Session->setFlash(__('Skill was not deleted'));
+		$this->redirect(array('action' => 'index'));
+	}
 }

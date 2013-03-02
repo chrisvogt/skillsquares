@@ -1,20 +1,34 @@
 <?php
+App::uses('AppModel', 'Model');
 /**
- * User model for SkillSquar.es.
+ * User Model
  *
- * @package       CakePHP
- * @subpackage    skillsquares
+ * @property Score $Score
  */
-class User extends Model {
-  /**
-   * Turn on application scaffolding
-   */
-  public $scaffold;
+class User extends AppModel {
 
-  public $hasMany = array(
-      'UserScore' => array(
-          'className' => 'Score',
-      )
-  );
+
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'Score' => array(
+			'className' => 'Score',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 
 }
